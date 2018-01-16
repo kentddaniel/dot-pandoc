@@ -23,9 +23,7 @@ A collection of support files for use with Pandoc, and specifically for helping 
 
 ## Installation and usage (KD):
 
-What I had to do:
-
-- You need to install pandoc and three pandoc filters.  Install these using Homebrew.  
+- Install pandoc and three pandoc filters.  Install these using Homebrew.  
     - Pandoc and the first filters two are easy:
       ```
       brew install pandoc
@@ -41,19 +39,34 @@ What I had to do:
           ```
 
 - Get [Marked 2](http://marked2app.com/) (the pandoc viewer).
-    - Note that won't work if you get it from the App Store.  So you should get it from this link. 
-        - If you already got it from the App Store, see below.
-- Tell Marked to use
-  pandoc as its custom processor. Go to *Marked > Preferences >
-  Advanced*. In the *Path:* field, type:
-  ```
-  /usr/local/bin/pandoc
-  ``` 
-- In the 'Args' field below it, like this (but all on one line):
-  ```
-  -r markdown+simple_tables+table_captions+yaml_metadata_block -w html -s -S --template=/Users/kent/.pandoc/templates/html.template --filter pandoc-crossref --filter pandoc-citeproc --filter pandoc-citeproc-preamble --bibliography=/Users/kent/bibtex/allrefs.bib
-  ```
-  Then check the box labeled "Automatically enable for new windows"
+    - Note that won't work if you get it from the App Store, because of restrictions Apple puts on the code.  So you should get it directly from the [Marked 2 website](http://marked2app.com/).
+        - If you already got it from the App Store, and you try to make the changes below, it will not work.  A window will pop up telling you to email them to get a license key.
+    - Tell Marked to use
+    pandoc as its custom processor. Go to *Marked > Preferences >
+    Advanced*. In the *Path:* field, type:
+    ```
+    /usr/local/bin/pandoc
+    ``` 
+    - In the 'Args' field below it, like this (but all on one line):
+    ```
+    -r markdown+simple_tables+table_captions+yaml_metadata_block -w html -s -mart --template=/Users/kent/.pandoc/templates/html.template --filter pandoc-crossref --filter pandoc-citeproc --filter pandoc-citeproc-preamble --bibliography=/Users/kent/bibtex/allrefs.bib
+    ```
+    Then check the box labeled "Automatically enable for new windows"
+- ***LaTeX files:*** 
+    - These commands moved the files I wanted.
+    ```
+    DEST=`kpsexpand '$TEXMFLOCAL'`
+    cd
+    mkdir kjhealy_pandoc
+    cd kjhealy_pandoc
+    git clone https://github.com/kjhealy/latex-custom-kjh.git
+    cd laxex-custom-kjh
+    cp -ipv needs-memoir/memoir-article-styles.sty $DEST/tex/latex/local
+    cp -ipv templates/basic/letter/*.cls $DEST/tex/latex/local
+    texhash
+    ```
+
+- ***Minon Pro fonts:***
 - Finally, create a project folder
     - copy the Makefile in ~/.pandoc/Makefile to that folder
     - copy pandoc-crossref-settings.yaml to that folder
