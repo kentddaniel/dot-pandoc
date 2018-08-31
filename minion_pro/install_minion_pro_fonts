@@ -7,7 +7,7 @@
 ## 0.1: Install LCDF Typetools
 ## http://www.lcdf.org/type/
 ## If you use Homebrew (http://mxcl.github.com/homebrew/), then uncomment: 
-brew install lcdf-typetools 
+#brew install lcdf-typetools 
 
 ## 0.2: If ~/tmp doesn't exist, create it.
 mkdir ~/tmp
@@ -75,8 +75,19 @@ cd ~/tmp/minionpro
 
 curl -L -O http://mirrors.ctan.org/fonts/minionpro/enc-2.000.zip
 curl -L -O http://mirrors.ctan.org/fonts/minionpro/metrics-base.zip
-curl -L -O http://mirrors.ctan.org/fonts/minionpro/metrics-full.zip
+
+##
+## KD: This file isn't used, given the available fonts
+##
+# curl -L -O http://mirrors.ctan.org/fonts/minionpro/metrics-full.zip
 curl -L -O http://mirrors.ctan.org/fonts/minionpro/scripts.zip
+
+
+##
+## KD:  Why is source.zip missing here? -- See  the README in
+##  https://ctan.org/tex-archive/fonts/minionpro/
+##
+
 
 ## This will make the otf directory, among other things.
 unzip scripts.zip
@@ -103,7 +114,7 @@ cd $SRC
 ## tree on OSX (~/Library ...), but will be needed otherwise
 
 mktexlsr
-updmap-sys --enable MixedMap MinionPro.map
+updmap-sys --syncwithtrees --enable MixedMap MinionPro.map
 
 ## I found I also had to run
 ## > updmap-sys

@@ -55,14 +55,13 @@ A collection of support files for use with Pandoc, and specifically for helping 
 - ***LaTeX files:*** 
     - These commands moved the files I wanted.
     ```
-    DEST=`kpsexpand '$TEXMFLOCAL'`
+    DEST=\`kpsexpand '$TEXMFLOCAL'`
     cd
     mkdir kjhealy_pandoc
     cd kjhealy_pandoc
     git clone https://github.com/kjhealy/latex-custom-kjh.git
     cd laxex-custom-kjh
-    cp -ipv needs-memoir/memoir-article-styles.sty $DEST/tex/latex/local
-    cp -ipv templates/basic/letter/*.cls $DEST/tex/latex/local
+    find . -name "*.sty" -exec cp -ipv {} $DEST/tex/latex/local \;
     texhash
     ```
 
